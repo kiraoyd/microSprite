@@ -62,7 +62,3 @@ class Wall(Obstacle):
         pass
 
 
-class MovingPipes(Obstacle):
-    def __init__(self):
-        pass
-
