@@ -1,3 +1,5 @@
+
+
 #How do we get the microbit code imported?
 
 class Sprite:
@@ -23,4 +25,29 @@ class Sprite:
     def getCurrentPosition(self):
         return {"x":self.__xCoord, "y":self.__yCoord}
     
-   
+    #NEXT: how to deal with steps that take us out of bounds cleanly?
+    def moveLeft(self, steps):
+        self.spriteOff()
+        if(self.xCoord - steps < self.xMin):
+            self.xCoord = self.xMax + self.xCoord - steps+1
+            print(self.xCoord)
+        else:
+            self.xCoord = self.xCoord - steps
+        self.spriteOn()
+
+    def moveRight(self, steps):
+        self.spriteOff()
+        self.xCoord = self.xCoord + steps
+        self.spriteOn()
+
+    def moveUp(self, steps):
+        self.spriteOff()
+        self.xCoord = self.yCoord + steps
+        self.spriteOn()
+
+    def moveDown(self, steps):
+        self.spriteOff()
+        self.xCoord = self.yCoord - steps
+        self.spriteOn()
+
+# I should have made a PR!
