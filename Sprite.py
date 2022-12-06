@@ -1,6 +1,5 @@
 
 import abc
-from abc import ABC
 #How do we get the microbit code imported?
 
 class Sprite:
@@ -47,6 +46,7 @@ class Sprite:
         self.xCoord = self.yCoord - steps
         self.spriteOn()
 
+# I should have made a PR!
 
     
         
@@ -54,8 +54,8 @@ class Sprite:
 
 class Obstacle(ABC):
     def __init__(self):
-        self.ledsOn = []
-        self.brightness = 0
+        self.sprites = []
+        self.numberOfSprites = 0
 
 class Wall(Obstacle):
     def __init__(self):
