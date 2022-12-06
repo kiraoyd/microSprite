@@ -1,5 +1,3 @@
-
-import abc
 #How do we get the microbit code imported?
 
 class Sprite:
@@ -47,18 +45,3 @@ class Sprite:
         self.spriteOn()
 
 # I should have made a PR!
-
-    
-        
-
-
-class Obstacle(ABC):
-    def __init__(self):
-        self.sprites = []
-        self.numberOfSprites = 0
-
-class Wall(Obstacle):
-    def __init__(self):
-        pass
-
-
