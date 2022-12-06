@@ -1,6 +1,5 @@
 
 
-#How do we get the microbit code imported?
 
 class Sprite:
     def __init__(self,startX, startY, brightness):
@@ -21,6 +20,20 @@ class Sprite:
     def setBrightness(self, level):
         self.brightness = level
     
+    def move(self,x,y):
+        self.xCoord = x
+        self.yCoord = y
+    
+    def getCurrentPosition(self):
+        position = []
+        position[0] = self.xCoord
+        position[1] = self.yCoord
+        return position
+
+    
+
+    
+
     #NEXT: how to deal with steps that take us out of bounds cleanly?
     def moveLeft(self, steps):
         self.spriteOff()
