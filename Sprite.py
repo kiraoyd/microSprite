@@ -1,5 +1,3 @@
-
-
 #How do we get the microbit code imported?
 
 class Sprite:
@@ -46,8 +44,4 @@ class Sprite:
         self.xCoord = self.yCoord - steps
         self.spriteOn()
 
-
-    
-        
-
-
+# I should have made a PR!
