@@ -1,6 +1,5 @@
 
-import abc
-from abc import ABC
+
 #How do we get the microbit code imported?
 
 class Sprite:
@@ -51,18 +50,4 @@ class Sprite:
     
         
 
-
-class Obstacle(ABC):
-    def __init__(self):
-        self.ledsOn = []
-        self.brightness = 0
-
-class Wall(Obstacle):
-    def __init__(self):
-        pass
-
-
-class MovingPipes(Obstacle):
-    def __init__(self):
-        pass
 
