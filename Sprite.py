@@ -1,11 +1,17 @@
 # micros:sprite
 # by Kira K & Mike W
 
+def deleteSprite(Sprite):
+    del Sprite
+
 class Sprite:
     def __init__(self,startX, startY, brightness):
         self.__xCoord = startX
         self.__yCoord = startY
         self.__brightness = brightness
+
+    def __del__(self):
+        print("Sprite Destroyed!")
 
     def on(self):
         display.set_pixel(self.__xCoord, self.__yCoord, self.__brightness) 
@@ -16,7 +22,7 @@ class Sprite:
     def setBrightness(self, level):
         self.__brightness = level
 
-    def move(self, x,y):
+    def moveTo(self, x,y):
         self.__xCoord = x
         self.__yCoord = y
 
