@@ -28,3 +28,13 @@ class Sprite:
 
     def getCurrentPosition(self):
         return {"x":self.__xCoord, "y":self.__yCoord}
+
+    def collision(obstacle):
+      collide = False
+      
+      obstacle_position = obstacle.getCurrentPosition()
+      
+      if self.__xCoord == obstacle_position["x"] and self.__yCoord == obstacle_position["y"]:
+        collide = True
+
+      return collide
