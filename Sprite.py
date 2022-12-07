@@ -21,6 +21,8 @@ class Sprite:
         
     def setBrightness(self, level):
         self.__brightness = level
+        self.on()
+        
 
     def moveTo(self, x,y):
         self.__xCoord = x
