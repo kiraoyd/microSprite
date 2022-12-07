@@ -1,5 +1,7 @@
-# micros:sprite
+# micro:sprite
 # by Kira K & Mike W
+
+from microbit import *
 
 def deleteSprite(Sprite):
     del Sprite
