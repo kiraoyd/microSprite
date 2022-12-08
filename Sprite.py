@@ -1,10 +1,11 @@
 # micro:sprite
 # by Kira K & Mike W
 
-from microbit import *
+#from microbit import *
 
 def deleteSprite(Sprite):
     del Sprite
+
 
 class Sprite:
     def __init__(self,startX, startY, brightness):
