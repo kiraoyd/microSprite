@@ -33,7 +33,7 @@ class Sprite:
     def getPosition(self):
         return {"x":self.__xCoord, "y":self.__yCoord}
 
-    def collision(obstacle):
+    def detectCollision(self, obstacle):
       collide = False
       
       obstacle_position = obstacle.getPosition()
@@ -42,4 +42,3 @@ class Sprite:
         collide = True
 
       return collide
-
