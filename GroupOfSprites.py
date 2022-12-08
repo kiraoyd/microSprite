@@ -39,6 +39,18 @@ class GroupOfSprites(object):
             position["x"] = position["x"] + moves
             sprite.moveTo(position["x"], position["y"])
 
+    def moveUpBy(self, moves):
+        for sprite in self.sprites:
+            position = sprite.getPosition()
+            position["y"] = position["y"] - moves
+            sprite.moveTo(position["x"], position["y"])
+
+    def moveDownBy(self,moves):
+        for sprite in self.sprites:
+            position = sprite.getPosition()
+            position["y"] = position["y"] + moves
+            sprite.moveTo(position["x"], position["y"])
+
 
 class Wall(GroupOfSprites):
     def __init__(self, listOfCoordinates, brightness):
@@ -55,30 +67,3 @@ class Wall(GroupOfSprites):
 
 
 
-
-
-
-#test Main
-
-#make group
-list = [{"x":2, "y":2}, {"x":2, "y":3}, {"x":2, "y":4}, {"x":1, "y":2}, {"x":1, "y":1}]
-group = GroupOfSprites(list, 9)
-group.appear()
-sleep(1000)
-group.vanish()
-group.moveLeftBy(1)
-group.appear()
-sleep(1000)
-group.vanish()
-
-
-# make wall, test takeDamage
-walllist = [{"x":2, "y":1}, {"x":2, "y":2}, {"x":2, "y":3}, {"x":2, "y":4}]
-wall = Wall(walllist, 9)
-wall.appear()
-sleep(1000)
-wall.vanish()
-wall.takeDamage([{"x":2, "y":2}], 4)
-wall.appear()
-sleep(1000)
-wall.vanish()
