@@ -2,7 +2,7 @@ from Sprite import *
 from time import sleep
 
 
-def createCoordinates(list):
+def createCoordinatesForGroup(list):
     xIndex = 0
     yIndex = 1
     coordinates = []
@@ -80,7 +80,3 @@ class Wall(GroupOfSprites):
                     sprite.loseBrightness(brightnessLost)
                 index += 1
 
-#test the createCoordinates function
-list = [2,2,3,4,5,5,0,1]
-coord = createCoordinates(list)
-print (coord)
