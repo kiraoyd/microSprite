@@ -1,6 +1,21 @@
 from Sprite import *
 from time import sleep
 
+
+def createCoordinatesForGroup(list):
+    xIndex = 0
+    yIndex = 1
+    coordinates = []
+    while yIndex < len(list):
+        temp = {"x":0, "y":0}
+        temp["x"] = list[xIndex]
+        temp["y"] = list[yIndex]
+        coordinates.append(temp)
+        xIndex += 1
+        yIndex += 1
+    return coordinates
+
+
 class GroupOfSprites(object):
     def __init__(self, listOfCoordinates, brightness):
         self.numberOfSprites = len(listOfCoordinates)
@@ -64,6 +79,3 @@ class Wall(GroupOfSprites):
                 if(coordinatesHit[index]["x"] == position["x"] and coordinatesHit[index]["y"] == position["y"]):
                     sprite.loseBrightness(brightnessLost)
                 index += 1
-
-
-
