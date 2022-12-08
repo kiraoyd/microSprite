@@ -6,6 +6,7 @@ from microbit import *
 def deleteSprite(Sprite):
     del Sprite
 
+
 class Sprite:
     def __init__(self,startX, startY, brightness):
         self.__xCoord = startX
