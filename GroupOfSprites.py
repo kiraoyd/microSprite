@@ -1,6 +1,7 @@
 from Sprite import *
+from time import sleep
 
-class GroupOfSprites:
+class GroupOfSprites(object):
     def __init__(self, listOfCoordinates, brightness):
         self.numberOfSprites = len(listOfCoordinates)
         self.coordinates = listOfCoordinates
@@ -38,16 +39,45 @@ class GroupOfSprites:
             position["x"] = position["x"] + moves
             sprite.moveTo(position["x"], position["y"])
 
+class Wall(GroupOfSprites):
+    def __init__(self, listOfCoordinates, brightness):
+        GroupOfSprites.__init__(self, listOfCoordinates, brightness)
+
+    def takeDamage(self, coordinatesHit, brightnessLost):
+        for sprite in self.sprites:
+            position = sprite.getPosition()
+            index = 0
+            while(index < len(coordinatesHit)):
+                if(coordinatesHit[index]["x"] == position["x"] and coordinatesHit[index]["y"] == position["y"]):
+                    sprite.loseBrightness(brightnessLost)
+                index += 1
+
+
 
 
 
 
 #test Main
 
+#make group
 list = [{"x":2, "y":2}, {"x":2, "y":3}, {"x":2, "y":4}, {"x":1, "y":2}, {"x":1, "y":1}]
 group = GroupOfSprites(list, 9)
 group.appear()
-sleep(100)
+sleep(1000)
 group.vanish()
 group.moveLeftBy(1)
 group.appear()
+sleep(1000)
+group.vanish()
+
+
+# make wall, test takeDamage
+walllist = [{"x":2, "y":1}, {"x":2, "y":2}, {"x":2, "y":3}, {"x":2, "y":4}]
+wall = Wall(walllist, 9)
+wall.appear()
+sleep(1000)
+wall.vanish()
+wall.takeDamage([{"x":2, "y":2}], 4)
+wall.appear()
+sleep(1000)
+wall.vanish()

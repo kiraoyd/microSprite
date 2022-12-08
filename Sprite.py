@@ -25,6 +25,12 @@ class Sprite:
         self.__brightness = level
         self.appear()
         
+    def loseBrightness(self, level):
+        self.__brightness = self.__brightness - level
+        self.appear()
+
+    def gainBrightness(self, level):
+        self.__brightness = self.__brightness + level
 
     def moveTo(self, x,y):
         self.__xCoord = x
