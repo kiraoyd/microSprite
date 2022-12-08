@@ -23,7 +23,6 @@ speed = 50
 pause = 500
 long_pause = 3000
 
-
 while True:
     # Start the Sprite
     turtle = Sprite(x, y, brightness)
@@ -74,12 +73,11 @@ while True:
     
     sleep(pause)
 
-    list = [{"x": 4, "y": 4}, 
-            {"x": 4, "y": 3}, 
-            {"x": 4, "y": 2}, 
-            {"x": 4, "y": 1},
-            {"x": 4, "y": 0}]
-    
+    #test the createCoordinatesForGroup function
+    list = [4,4,4,3,4,2,4,1,4,0]
+    coord = createCoordinatesForGroup(list)
+    print (coord)
+  
     wall = GroupOfSprites(list, brightness)
     wall.appear()
     sleep(pause)
