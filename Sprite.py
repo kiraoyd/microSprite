@@ -1,7 +1,7 @@
 # micro:sprite
 # by Kira K & Mike W
 
-#from microbit import *
+from microbit import *
 
 def deleteSprite(Sprite):
     del Sprite
@@ -41,7 +41,7 @@ class Sprite:
     def getPosition(self):
         return {"x":self.__xCoord, "y":self.__yCoord}
 
-    def detectCollision(self, obstacle):
+    def collisionDetected(self, obstacle):
       collide = False
       
       obstacle_position = obstacle.getPosition()
