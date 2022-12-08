@@ -33,8 +33,10 @@ class Sprite:
         self.__brightness = self.__brightness + level
 
     def moveTo(self, x,y):
+        self.vanish()
         self.__xCoord = x
         self.__yCoord = y
+        self.appear()
 
     def getPosition(self):
         return {"x":self.__xCoord, "y":self.__yCoord}

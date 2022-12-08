@@ -47,18 +47,14 @@ while True:
     # Test X Movement
     for i in range(15):
         x = (x - 1) % 5
-        turtle.vanish()
-        turtle.moveTo(x, y)
-        turtle.appear()    
+        turtle.moveTo(x, y)  
         sleep(rate)
     
     sleep(pause)
     
     for i in range(15):
         x = (x + 1) % 5
-        turtle.vanish()
         turtle.moveTo(x, y)
-        turtle.appear()
         sleep(rate)
     
     sleep(pause)
@@ -66,18 +62,14 @@ while True:
     # Test Y Movement
     for i in range(15):
         y = (y + 1) % 5
-        turtle.vanish()
         turtle.moveTo(x, y)
-        turtle.appear()
         sleep(rate)
     
     sleep(500)
     
     for i in range(15):
         y = (y - 1) % 5
-        turtle.vanish()
         turtle.moveTo(x, y)
-        turtle.appear()
         sleep(rate)
     
     sleep(pause)
@@ -97,8 +89,7 @@ while True:
     while collision == False:
         for cell in wall.sprites:
             
-            if turtle.collision(cell):
-                sleep(pause)
+            if turtle.detectCollision(cell):
                 display.show(Image.SAD)
                 collision = True
                 turtle.vanish()
@@ -109,17 +100,40 @@ while True:
 
         if button_a.was_pressed():
             x = (x - 1) % 5
-            turtle.vanish()
             turtle.moveTo(x, y)
-            turtle.appear()
             
         if button_b.was_pressed():
             x = (x + 1) % 5
-            turtle.vanish()
             turtle.moveTo(x, y)
-            turtle.appear()
+
 
     print(id(wall))
+    sleep(pause)
+
+    ##### TEST GroupOfSprites #######
+
+    #make group
+    list = [{"x":2, "y":2}, {"x":2, "y":3}, {"x":2, "y":4}, {"x":1, "y":2}, {"x":1, "y":1}]
+    group = GroupOfSprites(list, 9)
+    group.appear()
+    sleep(1000)
+    group.moveLeftBy(1)
+    sleep(1000)
+    group.vanish()
+
+    sleep(pause)
+
+    # make wall, test takeDamage
+    walllist = [{"x":2, "y":1}, {"x":2, "y":2}, {"x":2, "y":3}, {"x":2, "y":4}]
+    wall = Wall(walllist, 9)
+    wall.appear()
+    sleep(1000)
+    wall.vanish()
+    wall.takeDamage([{"x":2, "y":2}], 4)
+    wall.appear()
+    sleep(1000)
+    wall.vanish()
+
     sleep(pause)
     
     
