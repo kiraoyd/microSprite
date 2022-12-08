@@ -79,4 +79,3 @@ class Wall(GroupOfSprites):
                 if(coordinatesHit[index]["x"] == position["x"] and coordinatesHit[index]["y"] == position["y"]):
                     sprite.loseBrightness(brightnessLost)
                 index += 1
-
