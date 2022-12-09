@@ -66,55 +66,62 @@ class GroupOfSprites(object):
             sprite.setBrightness(brightness)
 
     def moveLeftBy(self, moves):
-        """Shifts each Sprite in this GroupOfSprites to the left along the x-axis by 'moves' number of LEDs"""
-
+        """Shifts each Sprite in this GroupOfSprites to the left along the x-axis by 'moves' number of LEDs, returns a list of the new positions"""
+        newPositions = []
         for sprite in self.__sprites:
             position = sprite.getPosition()
             position["x"] = position["x"] - moves
-            return sprite.moveTo(position["x"], position["y"])
+            newPositions.append(sprite.moveTo(position["x"], position["y"]))
+        return newPositions
            
 
     def moveRightBy(self, moves):
-        """Shifts each Sprite in this GroupOfSprites to the right along the x-axis by 'moves' number of LEDs"""
-
+        """Shifts each Sprite in this GroupOfSprites to the right along the x-axis by 'moves' number of LEDs. returns a list of the new positions"""
+        newPositions = []
         for sprite in self.__sprites:
             position = sprite.getPosition()
             position["x"] = position["x"] + moves
-            return sprite.moveTo(position["x"], position["y"])
+            newPositions.append(sprite.moveTo(position["x"], position["y"]))
+        return newPositions
             
 
     def moveUpBy(self, moves):
-        """Shifts each Sprite in this GroupOfSprites up along the y-axis by 'moves' number of LEDs"""
-
+        """Shifts each Sprite in this GroupOfSprites up along the y-axis by 'moves' number of LEDs, returns a list of the new positions"""
+        newPositions = []
         for sprite in self.__sprites:
             position = sprite.getPosition()
             position["y"] = position["y"] - moves
-            return sprite.moveTo(position["x"], position["y"])
+            newPositions.append(sprite.moveTo(position["x"], position["y"]))
+        return newPositions
   
 
     def moveDownBy(self,moves):
-        """Shifts each Sprite in this GroupOfSprites down along the y-axis by 'moves' number of LEDs"""
-
+        """Shifts each Sprite in this GroupOfSprites down along the y-axis by 'moves' number of LEDs, returns a list of the new positions"""
+        newPositions = []
         for sprite in self.__sprites:
             position = sprite.getPosition()
             position["y"] = position["y"] + moves
-            return sprite.moveTo(position["x"], position["y"])
+            newPositions.append(sprite.moveTo(position["x"], position["y"]))
+        return newPositions
 
 
     #Another option for how to move
     def moveToX(self, newX):
-        """Moves the entire group of Sprites along the x-axis, to the x-axis value specified by the argument. A move to the left should take a negative number as an argument, and a move to the right a positive number"""
-
+        """Moves the entire group of Sprites along the x-axis, to the x-axis value specified by the argument. A move to the left should take a negative number as an argument, and a move to the right a positive number. Returns a list of the new positions"""
+        newPositions = []
         for sprite in self.__sprites:
             position = sprite.getPosition()
-            sprite.moveTo(newX, position["y"])
+            newPositions.append(sprite.moveTo(newX, position["y"]))
+        return newPositions
 
     def moveToY(self, newY):
-        """Moves the entire group of Sprites along the y-axis, to the y-axis value specified by the argument. A move up should take a negative number as an argument, and a move down a positive number"""
+        """Moves the entire group of Sprites along the y-axis, to the y-axis value specified by the argument. A move up should take a negative number as an argument, and a move down a positive number. Returns a list of the new positions"""
 
+        newPositions = []
         for sprite in self.__sprites:
             position = sprite.getPosition()
-            sprite.moveTo(position["x"], newY)
+            newPositions.append(sprite.moveTo(position["x"], newY))
+        return newPositions
 
 
 class Wall(GroupOfSprites):
