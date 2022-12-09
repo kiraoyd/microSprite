@@ -27,15 +27,7 @@ while (alive):
     while(not eaten):
         if accelerometer.was_gesture('up'):
             snake.moveUpBy(1)
-        elif accelerometer.was_gesture('down'):
-            snake.moveDownBy(1)
-        elif accelerometer.was_gesture('right'):
-            snake.moveRightBy(1)
-        elif accelerometer.was_gesture('left'):
-            snake.moveLeftBy(1)
-
-        if
-
+            
 
     
 
