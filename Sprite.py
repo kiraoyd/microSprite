@@ -32,10 +32,22 @@ class Sprite(Location):
     def __del__(self):
         print("Sprite Destroyed!")
 
+    def inBounds(self):
+        """Returns True if the Sprites x and y coordinates are in bounds of the 5x5 micro:bit"""
+        inBound = False
+        if(self.__xCoord <= 4 and self.__xCoord >= 0):
+            if(self.__yCoord <=4 and self._yCoord >= 0):
+                inBound = True
+        return inBound
+
     def appear(self):
         """Turns 'on' this Sprite by activating the LED with its specified brightness"""
-
-        display.set_pixel(self.__xCoord, self.__yCoord, self.__brightness) 
+        if self.inBounds():
+            display.set_pixel(self.__xCoord, self.__yCoord, self.__brightness) 
+        else:
+            print("Sorry that locaton is out of display bounds, we cannot show it")
+        
+            
 
     def vanish(self):
         """Turns 'off' this Sprite by activating the LED at a brightness level of 0 (none)"""
@@ -61,7 +73,6 @@ class Sprite(Location):
 
     def moveTo(self, x,y):
         """Turns off the LED, resets the Sprite to a new (x,y) location, and turns on the LED found at the new (x,y) location. """
-
         self.vanish()
         self.__xCoord = x
         self.__yCoord = y

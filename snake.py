@@ -1,14 +1,11 @@
 from Sprite import *
 from GroupOfSprites import *
-
 from random import *
 import math
 
 
-
 startX = 0
 startY = 4
-
 snakeBrightness = 5
 
 empty = []
@@ -25,19 +22,31 @@ while (alive):
     appleX = math.floor(4*random())
     appleY = math.floor(4*random())
     apple = Sprite(appleX, appleY, appleBrightness)
+    apple.appear()
+    appleSpot = apple.getPosition()
     eaten = False
 
     while(not eaten):
+        position = {}
         if accelerometer.was_gesture('up'):
-            snake.moveUpBy(1)
+            position = snake.moveUpBy(1)
+        elif accelerometer.was_gesture('down'):
+            position = snake.moveDownBy(1)
+        elif accelerometer.was_gesture('left'):
+            position = snake.moveLeftBy(1)
+        elif accelerometer.was_gesture('right'):
+            position = snake.moveRightBy(1)
+
+        
+        if position["x"] == appleSpot["x"] and position["y"] == appleSpot["y"]:
+            eaten = True
+            apple.vanish()
+            #how to grow the snake
+
+        if position["x"] > 4:
+            
+
             
 
     
-
-snakeBrightness = 9
-
-snakeHead = Sprite(startX, startY, snakeBrightness)
-snakeSprites.append(snakeHead)
-snakeHead.
-
 
