@@ -12,11 +12,13 @@ class Location(object):
         self.__xCoord = startX
         self.__yCoord = startY
 
+
     def collisionDetected(self, x, y):
         collide = False
         if self.__xCoord == x and self.yCoord == y:
-            collide = True
-
+            brightness = display.get_pixel(x,y)
+            if(brightness > 0):
+                collide = True
         return collide
 
 
@@ -58,7 +60,7 @@ class Sprite(Location):
         self.__brightness = self.__brightness + level
 
     def moveTo(self, x,y):
-        """Turns off the LED, resets the Sprite to a new (x,y) location, and turns on the LED found at the new (x,y) location"""
+        """Turns off the LED, resets the Sprite to a new (x,y) location, and turns on the LED found at the new (x,y) location. """
 
         self.vanish()
         self.__xCoord = x
@@ -73,6 +75,12 @@ class Sprite(Location):
     def collisionWithSpriteDetected(self, obstacle):
         """Takes in another Sprite as an argument, and returns True if that Sprite is in the same position as this Sprite"""
         
+        collide = False
+
         obstacle_position = obstacle.getPosition()
-        return self.collisionDetected(obstacle_position["x"], obstacle_position["y"])
+
+        if self.__xCoord == obstacle_position["x"] and self.__yCoord == obstacle_position["y"]:
+            collide = True
+            
+        return collide
             
