@@ -65,7 +65,8 @@ class GroupOfSprites(object):
         for sprite in self.__sprites:
             position = sprite.getPosition()
             position["x"] = position["x"] - moves
-            sprite.moveTo(position["x"], position["y"])
+            return sprite.moveTo(position["x"], position["y"])
+           
 
 
     def moveRightBy(self, moves):
@@ -74,7 +75,8 @@ class GroupOfSprites(object):
         for sprite in self.__sprites:
             position = sprite.getPosition()
             position["x"] = position["x"] + moves
-            sprite.moveTo(position["x"], position["y"])
+            return sprite.moveTo(position["x"], position["y"])
+            
 
     def moveUpBy(self, moves):
         """Moves the entire group of Sprites to the up by the number of moves specified by the argument"""
@@ -82,7 +84,8 @@ class GroupOfSprites(object):
         for sprite in self.__sprites:
             position = sprite.getPosition()
             position["y"] = position["y"] - moves
-            sprite.moveTo(position["x"], position["y"])
+            return sprite.moveTo(position["x"], position["y"])
+  
 
     def moveDownBy(self,moves):
         """Moves the entire group of Sprites down by the number of moves specified by the argument"""
@@ -90,7 +93,8 @@ class GroupOfSprites(object):
         for sprite in self.__sprites:
             position = sprite.getPosition()
             position["y"] = position["y"] + moves
-            sprite.moveTo(position["x"], position["y"])
+            return sprite.moveTo(position["x"], position["y"])
+         
 
     #Another option for how to move
     def moveToX(self, newX):

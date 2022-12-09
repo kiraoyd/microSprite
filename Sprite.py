@@ -66,6 +66,7 @@ class Sprite(Location):
         self.__xCoord = x
         self.__yCoord = y
         self.appear()
+        return {"x":x, "y":y}
 
     def getPosition(self):
         """Returns, as a dictionary, the (x,y) position this Sprite occupies when called"""
