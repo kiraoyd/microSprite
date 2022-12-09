@@ -12,8 +12,9 @@ empty = []
 snake = GroupOfSprites(empty, snakeBrightness)
 snakeHead = Sprite(startX, startY, snakeBrightness)
 snake.addSprite(snakeHead)
+score = 0
 
-alive = true
+alive = True
 
 while (alive):
 
@@ -41,9 +42,19 @@ while (alive):
         if position["x"] == appleSpot["x"] and position["y"] == appleSpot["y"]:
             eaten = True
             apple.vanish()
+            score += 1
             #how to grow the snake
+        
+        #the out of bounds check isn't working right....come back to this
+        if position["x"] > 4 or position["x"] < 0:
+            alive = False
+        
+        if position["y"] > 4 or position["y"] < 0:
+            alive = False
 
-        if position["x"] > 4:
+display.scroll('apples: ', score)
+display.show(Image.SKULL)
+sleep(400)
             
 
             

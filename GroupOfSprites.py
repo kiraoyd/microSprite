@@ -18,14 +18,14 @@ def createCoordinatesForGroup(list):
 
 class GroupOfSprites(object):
     def __init__(self, listOfCoordinates, brightness):
-        self.numberOfSprites = len(listOfCoordinates)
-        self.coordinates = listOfCoordinates
-        self.sprites = []
-        self.brightness = brightness
+        self.__numberOfSprites = len(listOfCoordinates)
+        self.__coordinates = listOfCoordinates
+        self.__sprites = []
+        self.__brightness = brightness
       
         #instantiate Sprites
         for sprite in listOfCoordinates:
-            self.sprites.append(Sprite(sprite["x"], sprite["y"], self.brightness))
+            self.__sprites.append(Sprite(sprite["x"], sprite["y"], self.__brightness))
             print("Sprite added") #testline
 
     def addSprite(self, sprite):
@@ -41,30 +41,21 @@ class GroupOfSprites(object):
             spriteLocations.append(position)
         return spriteLocations
             
-    def getGroupPosition(self):
-        """Returns a list of {"x":x, "y":y} coordinate dictionaries, representing the current locations of all Sprites in this Group"""
-
-        spriteLocations = []
-        for sprite in self.__sprites:
-            position = sprite.getPosition()
-            spriteLocations.append(position)
-        return spriteLocations
-            
     def appear(self):
-        for sprite in self.sprites:
+        for sprite in self.__sprites:
             sprite.appear()
 
     def vanish(self):
-        for sprite in self.sprites:
+        for sprite in self.__sprites:
             sprite.vanish()
 
     def setBrightness(self, brightness):
-        for sprite in self.sprites:
+        for sprite in self.__sprites:
             sprite.setBrightness(brightness)
 
     #check for out of bounds needs to be handled by each Sprites moveTo() call
     def moveLeftBy(self, moves):
-        for sprite in self.sprites:
+        for sprite in self.__sprites:
             position = sprite.getPosition()
             position["x"] = position["x"] - moves
             return sprite.moveTo(position["x"], position["y"])
@@ -72,24 +63,24 @@ class GroupOfSprites(object):
 
 
     def moveRightBy(self, moves):
-        for sprite in self.sprites:
+        for sprite in self.__sprites:
             position = sprite.getPosition()
             position["x"] = position["x"] + moves
             return sprite.moveTo(position["x"], position["y"])
             
 
     def moveUpBy(self, moves):
-        for sprite in self.sprites:
+        for sprite in self.__sprites:
             position = sprite.getPosition()
             position["y"] = position["y"] - moves
             return sprite.moveTo(position["x"], position["y"])
   
 
     def moveDownBy(self,moves):
-        for sprite in self.sprites:
+        for sprite in self.__sprites:
             position = sprite.getPosition()
             position["y"] = position["y"] + moves
-            sprite.moveTo(position["x"], position["y"])
+            return sprite.moveTo(position["x"], position["y"])
 
 
     #Another option for how to move
@@ -113,7 +104,7 @@ class Wall(GroupOfSprites):
         GroupOfSprites.__init__(self, listOfCoordinates, brightness)
 
     def takeDamage(self, coordinatesHit, brightnessLost):
-        for sprite in self.sprites:
+        for sprite in self.__sprites:
             position = sprite.getPosition()
             index = 0
             while(index < len(coordinatesHit)):
