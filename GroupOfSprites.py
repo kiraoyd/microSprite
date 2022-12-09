@@ -45,26 +45,30 @@ class GroupOfSprites(object):
         for sprite in self.sprites:
             position = sprite.getPosition()
             position["x"] = position["x"] - moves
-            sprite.moveTo(position["x"], position["y"])
+            return sprite.moveTo(position["x"], position["y"])
+           
 
 
     def moveRightBy(self, moves):
         for sprite in self.sprites:
             position = sprite.getPosition()
             position["x"] = position["x"] + moves
-            sprite.moveTo(position["x"], position["y"])
+            return sprite.moveTo(position["x"], position["y"])
+            
 
     def moveUpBy(self, moves):
         for sprite in self.sprites:
             position = sprite.getPosition()
             position["y"] = position["y"] - moves
-            sprite.moveTo(position["x"], position["y"])
+            return sprite.moveTo(position["x"], position["y"])
+  
 
     def moveDownBy(self,moves):
         for sprite in self.sprites:
             position = sprite.getPosition()
             position["y"] = position["y"] + moves
-            sprite.moveTo(position["x"], position["y"])
+            return sprite.moveTo(position["x"], position["y"])
+         
 
 
 class Wall(GroupOfSprites):

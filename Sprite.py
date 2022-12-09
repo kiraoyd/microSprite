@@ -38,6 +38,7 @@ class Sprite:
         self.__xCoord = x
         self.__yCoord = y
         self.appear()
+        return {"x":x, "y":y}
 
     def getPosition(self):
         return {"x":self.__xCoord, "y":self.__yCoord}
