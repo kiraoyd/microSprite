@@ -24,12 +24,12 @@ class Sprite:
         display.set_pixel(self.__xCoord, self.__yCoord, self.__brightness) 
 
     def vanish(self):
-        """Turns 'off' this Sprite by activating the LED with no brightness"""
+        """Turns 'off' this Sprite by activating the LED at a brightness level of 0 (none)"""
 
         display.set_pixel(self.__xCoord, self.__yCoord, 0)
         
     def setBrightness(self, level):
-        """Sets the brightness level for this Sprite"""
+        """Sets the brightness level for this Sprite to a value between 0 (no brightness) and 9 (highest brightness)"""
 
         self.__brightness = level
         self.appear()
@@ -46,7 +46,7 @@ class Sprite:
         self.__brightness = self.__brightness + level
 
     def moveTo(self, x,y):
-        """Turns off the LED, resets the sprite to a new (x,y) location, and turns the LED found there on"""
+        """Turns off the LED, resets the Sprite to a new (x,y) location, and turns on the LED found at the new (x,y) location"""
 
         self.vanish()
         self.__xCoord = x
