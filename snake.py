@@ -1,3 +1,4 @@
+
 from Sprite import *
 from GroupOfSprites import *
 from random import *
@@ -6,12 +7,13 @@ import math
 
 startX = 0
 startY = 4
-snakeBrightness = 5
+snakeBrightness = 9
 
 empty = []
 snake = GroupOfSprites(empty, snakeBrightness)
 snakeHead = Sprite(startX, startY, snakeBrightness)
 snake.addSprite(snakeHead)
+snake.appear()
 score = 0
 
 alive = True
@@ -19,7 +21,7 @@ alive = True
 while (alive):
 
     #generate an apple
-    appleBrightness = 5
+    appleBrightness = 3
     appleX = math.floor(4*random())
     appleY = math.floor(4*random())
     apple = Sprite(appleX, appleY, appleBrightness)
@@ -28,36 +30,34 @@ while (alive):
     eaten = False
 
     while(not eaten):
-        position = {}
+    
         if accelerometer.was_gesture('up'):
-            position = snake.moveUpBy(1)
+            snake.moveUpBy(1)
         elif accelerometer.was_gesture('down'):
-            position = snake.moveDownBy(1)
+            snake.moveDownBy(1)
         elif accelerometer.was_gesture('left'):
-            position = snake.moveLeftBy(1)
+            snake.moveLeftBy(1)
         elif accelerometer.was_gesture('right'):
-            position = snake.moveRightBy(1)
+            snake.moveRightBy(1)
+
+        newSpritePositions = snake.getGroupPosition()
 
         
-        if position["x"] == appleSpot["x"] and position["y"] == appleSpot["y"]:
+        if newSpritePositions[0]["x"] == appleSpot["x"] and newSpritePositions[0]["y"] == appleSpot["y"]:
             eaten = True
             apple.vanish()
+            snake.appear()
             score += 1
             #how to grow the snake
         
         #the out of bounds check isn't working right....come back to this
-        if position["x"] > 4 or position["x"] < 0:
+        if newSpritePositions[0]["x"] > 4 or newSpritePositions[0]["x"] < 0:
             alive = False
         
-        if position["y"] > 4 or position["y"] < 0:
+        if newSpritePositions[0]["y"] > 4 or newSpritePositions[0]["y"] < 0:
             alive = False
 
 display.scroll('apples: ', score)
 display.show(Image.SKULL)
 sleep(400)
             
-
-            
-
-    
-
