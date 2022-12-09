@@ -66,6 +66,17 @@ class GroupOfSprites(object):
             position["y"] = position["y"] + moves
             sprite.moveTo(position["x"], position["y"])
 
+    #Another option for how to move
+    def moveToX(self, newX):
+        for sprite in self.sprites:
+            position = sprite.getPosition()
+            sprite.moveTo(newX, position["y"])
+
+    def moveToY(self, newY):
+        for sprite in self.sprites:
+            position = sprite.getPosition()
+            sprite.moveTo(position["x"], newY)
+
 
 class Wall(GroupOfSprites):
     def __init__(self, listOfCoordinates, brightness):
