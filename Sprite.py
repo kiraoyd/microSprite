@@ -6,13 +6,25 @@
 def deleteSprite(Sprite):
     del Sprite
 
+class Location(object):
 
-class Sprite:
+    def __init__(self, startX, startY):
+        self.__xCoord = startX
+        self.__yCoord = startY
+
+    def collisionDetected(self, x, y):
+        collide = False
+        if self.__xCoord == x and self.yCoord == y:
+            collide = True
+
+        return collide
+
+
+class Sprite(Location):
     """Implements methods to manipulate a single LED at some location (x,y) on the Micro:bit display"""
     
     def __init__(self,startX, startY, brightness):
-        self.__xCoord = startX
-        self.__yCoord = startY
+        Location.__init__(self, startX, startY)
         self.__brightness = brightness
 
     def __del__(self):
@@ -29,7 +41,7 @@ class Sprite:
         display.set_pixel(self.__xCoord, self.__yCoord, 0)
         
     def setBrightness(self, level):
-        """Sets the brightness level for this Sprite to a value between 0 (no brightness) and 9 (highest brightness)"""
+        """Sets the brightness level for this Sprite to a value between 0 (no brightness) and 9 (highest brightness), specified by the argument"""
 
         self.__brightness = level
         self.appear()
@@ -58,13 +70,9 @@ class Sprite:
 
         return {"x":self.__xCoord, "y":self.__yCoord}
 
-    def collisionDetected(self, obstacle):
+    def collisionWithSpriteDetected(self, obstacle):
         """Takes in another Sprite as an argument, and returns True if that Sprite is in the same position as this Sprite"""
-        collide = False
         
         obstacle_position = obstacle.getPosition()
-        
-        if self.__xCoord == obstacle_position["x"] and self.__yCoord == obstacle_position["y"]:
-            collide = True
+        return self.collisionDetected(obstacle_position["x"], obstacle_position["y"])
             
-        return collide
