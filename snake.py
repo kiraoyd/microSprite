@@ -49,13 +49,15 @@ while (alive):
             snake.appear()
             score += 1
             #how to grow the snake
-        
+
         #the out of bounds check isn't working right....come back to this
         if newSpritePositions[0]["x"] > 4 or newSpritePositions[0]["x"] < 0:
             alive = False
+            eaten = True
         
         if newSpritePositions[0]["y"] > 4 or newSpritePositions[0]["y"] < 0:
             alive = False
+            eaten = True
 
 display.scroll('apples: ', score)
 display.show(Image.SKULL)
