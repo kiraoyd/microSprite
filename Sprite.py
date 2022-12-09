@@ -15,7 +15,7 @@ class Location(object):
 
     def collisionDetected(self, x, y):
         collide = False
-        if self.__xCoord == x and self.yCoord == y:
+        if self.__xCoord == x and self.__yCoord == y:
             brightness = display.get_pixel(x,y)
             if(brightness > 0):
                 collide = True
@@ -36,7 +36,7 @@ class Sprite(Location):
         """Returns True if the Sprites x and y coordinates are in bounds of the 5x5 micro:bit"""
         inBound = False
         if(self.__xCoord <= 4 and self.__xCoord >= 0):
-            if(self.__yCoord <=4 and self._yCoord >= 0):
+            if(self.__yCoord <=4 and self.__yCoord >= 0):
                 inBound = True
         return inBound
 
@@ -51,8 +51,8 @@ class Sprite(Location):
 
     def vanish(self):
         """Turns 'off' this Sprite by activating the LED at a brightness level of 0 (none)"""
-
-        display.set_pixel(self.__xCoord, self.__yCoord, 0)
+        if self.inBounds():
+            display.set_pixel(self.__xCoord, self.__yCoord, 0)
         
     def setBrightness(self, level):
         """Sets the brightness level for this Sprite to a value between 0 (no brightness) and 9 (highest brightness), specified by the argument"""
