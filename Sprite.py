@@ -1,12 +1,13 @@
 # micro:sprite
 # by Kira K & Mike W
 
-#from microbit import *
+from microbit import *
 
 def deleteSprite(Sprite):
     del Sprite
 
 class Location(object):
+    """Base class, implements methods for a single (x,y) location on the Micro:bit LED display."""
 
     def __init__(self, startX, startY):
         self.__xCoord = startX
@@ -14,6 +15,8 @@ class Location(object):
 
 
     def collisionDetected(self, x, y):
+        """Takes in a value for an x-coordinate and a value for a y-coordinate, if they match this Sprites coordinates and the LED has a brightness > 0, this function returns True, otherwise returns False"""
+
         collide = False
         if self.__xCoord == x and self.__yCoord == y:
             brightness = display.get_pixel(x,y)
@@ -23,7 +26,7 @@ class Location(object):
 
 
 class Sprite(Location):
-    """Implements methods to manipulate a single LED at some location (x,y) on the Micro:bit display"""
+    """Extends the Location class, implements methods to manipulate a Sprite (represented by a single LED) at some location (x,y) on the Micro:bit display"""
     
     def __init__(self,startX, startY, brightness):
         Location.__init__(self, startX, startY)
@@ -33,7 +36,7 @@ class Sprite(Location):
         print("Sprite Destroyed!")
 
     def inBounds(self):
-        """Returns True if the Sprites x and y coordinates are in bounds of the 5x5 micro:bit"""
+        """Returns True if the Sprites x and y coordinates are in bounds of the 5x5 Micro:bit display. The LED at the upper left corner of the display represents coordinate (0,0)"""
         inBound = False
         if(self.__xCoord <= 4 and self.__xCoord >= 0):
             if(self.__yCoord <=4 and self.__yCoord >= 0):
@@ -47,8 +50,6 @@ class Sprite(Location):
         else:
             print("Sorry that locaton is out of display bounds, we cannot show it")
         
-            
-
     def vanish(self):
         """Turns 'off' this Sprite by activating the LED at a brightness level of 0 (none)"""
         if self.inBounds():
@@ -72,7 +73,7 @@ class Sprite(Location):
         self.__brightness = self.__brightness + level
 
     def moveTo(self, x,y):
-        """Turns off the LED, resets the Sprite to a new (x,y) location, and turns on the LED found at the new (x,y) location. """
+        """Turns off the LED, resets the Sprite to a new (x,y) location, turns on the LED found at the new (x,y) location, and returns the coordinates of the new location in the form: {"x":xVal, "y":yVal}"""
         self.vanish()
         self.__xCoord = x
         self.__yCoord = y
@@ -80,19 +81,16 @@ class Sprite(Location):
         return {"x":x, "y":y}
 
     def getPosition(self):
-        """Returns, as a dictionary, the (x,y) position this Sprite occupies when called"""
+        """Returns the (x,y) position this Sprite occupies, in the form: {"x":xVal, "y":yVal}"""
 
         return {"x":self.__xCoord, "y":self.__yCoord}
 
     def collisionWithSpriteDetected(self, obstacle):
-        """Takes in another Sprite as an argument, and returns True if that Sprite is in the same position as this Sprite"""
+        """Takes in another Sprite as an argument, and returns True if that Sprite is in the same (x,y) position as this Sprite"""
         
         collide = False
-
         obstacle_position = obstacle.getPosition()
-
         if self.__xCoord == obstacle_position["x"] and self.__yCoord == obstacle_position["y"]:
             collide = True
-            
         return collide
             
