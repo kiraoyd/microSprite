@@ -1,8 +1,7 @@
-########################
-##### flappy sprite ####
-# running time version #
-##### by Mike W ########
-########################
+#####################
+### flappy sprite ###
+##### by Mike W #####
+#####################
 
 # Import Starter Pack
 from microbit import *
@@ -15,15 +14,14 @@ import speech
 display.clear()
 
 # Variable Starter Pack
-you_lose = False
-score = 0
 x = 1
-y = 2
+y = 0
 brightness = 9
+score = 0
 
 # Create Player
 player = Sprite(x, y, brightness)
-
+player.appear()
 
 # Create the Obstacles
 pipe0 = GroupOfSprites([
@@ -48,57 +46,76 @@ pipe3 =  GroupOfSprites([
                         brightness)
 pipes = [pipe0, pipe1, pipe2, pipe3]
 
-pipe_events = {'appear': 0,
-               'move1': 0,
-               'move2': 0,
-               'move3': 0,
-               'move4': 0,
-               'move5': 0,
-               'vanish': 0 }
+# timing variables
+PIPE_DELAY = 800
+FALL_DELAY = 1000
+FLAP_DELAY = 200
 
-pipe_intervals = {'appear': 1000,
-                  'move1': 2000,
-                  'move2': 3000,
-                  'move3': 4000,
-                  'move4': 5000,
-                  'move5': 6000,
-                  'vanish': 7000 }
+flap_time1 = 0
+flap_time2 = 0
+pipe_time = 0
+fall_time = 0
+stall_time = 0
+
+# Create a Pipe
+pipe = choice(pipes)
+pipe.appear()
+x = 4
+
 
 while True:
-    current_time = running_time()
-    x = 4
-    pipe = choice(pipes)
-    
-    if current_time - pipe_events['appear'] >= pipe_intervals['appear']:
-        pipe.appear()
-        pipe_events['appear'] = running_time()
-    
-    if current_time - pipe_events['move1'] >= pipe_intervals['move1']:     
-        pipe.moveToX(3)
-        x -= 1
-        pipe_events['move1'] = running_time()
 
-    if current_time - pipe_events['move2'] >= pipe_intervals['move2']:     
-        pipe.moveToX(2)
-        x -= 1
-        pipe_events['move2'] = running_time()
+    # Capture Time
+    elapsed_time_flap1 = running_time()
+    elapsed_time_flap2 = running_time()
+    elapsed_time_pipe = running_time()
+    elapsed_time_fall = running_time()
+    elapsed_time_stall = running_time()
 
-    if current_time - pipe_events['move3'] >= pipe_intervals['move3']:     
-        pipe.moveToX(1)
-        x -= 1
-        pipe_events['move3'] = running_time()
-
-    if current_time - pipe_events['move4'] >= pipe_intervals['move4']:     
-        pipe.moveToX(0)
-        x -= 1
-        pipe_events['move4'] = running_time()
-    
-    
-    if current_time - pipe_events['vanish'] >= pipe_intervals['vanish']:
-        pipe.vanish()
-        pipe_events['vanish'] = running_time()
-    
-    
+    # Flap
+    if button_a.was_pressed():
+        y = y - 1
+        if y < 0:
+            y = 0
+            
         
+        player.moveTo(1, y)
+        flap_time1 = running_time()
     
     
+    # Collision
+    elif player.getPosition() in pipe.getGroupPosition():
+        print('crash')
+        break
+            
+    # Fall
+    elif elapsed_time_fall - fall_time >= FALL_DELAY:
+        y = y + 1
+        if y > 4:
+            y = 4
+
+        player.moveTo(1, y)
+        fall_time = running_time()
+
+    elif elapsed_time_stall - stall_time >= 2000:
+        player.moveTo(1, y)
+        stall_time = running_time()
+            
+    # Wall
+    elif elapsed_time_pipe - pipe_time >= PIPE_DELAY:
+        x -= 1
+        if x <= -1:
+            x = 4
+            score += 1
+            pipe.vanish()
+            pipe = choice(pipes)
+            pipe.appear()
+            
+        else:
+            pipe.moveToX(x)
+        
+        pipe_time = running_time()
+
+display.show(Image.SKULL)
+sleep(500)
+display.scroll(score)
